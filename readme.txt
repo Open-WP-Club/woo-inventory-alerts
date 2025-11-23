@@ -3,7 +3,7 @@ Contributors: openwpclub
 Tags: woocommerce, inventory, stock, alerts, orders
 Requires at least: 5.8
 Tested up to: 6.8
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires PHP: 7.4
 License: Apache-2.0
 License URI: https://www.apache.org/licenses/LICENSE-2.0

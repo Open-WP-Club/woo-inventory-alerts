@@ -3,7 +3,7 @@
  * Plugin Name: Inventory Alerts for WooCommerce
  * Plugin URI: https://github.com/Open-WP-Club/woo-inventory-alerts
  * Description: Shows alerts for low stock and out of stock items directly on the WooCommerce order edit page.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: Open WP Club
  * Author URI: https://github.com/Open-WP-Club
  * License: Apache-2.0
@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Plugin constants
-define('WIA_VERSION', '1.1.0');
+define('WIA_VERSION', '1.1.1');
 define('WIA_PLUGIN_FILE', __FILE__);
 define('WIA_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WIA_PLUGIN_URL', plugin_dir_url(__FILE__));
