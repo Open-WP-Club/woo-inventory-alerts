@@ -120,6 +120,13 @@ class WIA_Inventory_Alerts {
     }
 
     /**
+     * Check if alerts are hidden
+     */
+    public function is_alerts_hidden() {
+        return (bool) get_option('wia_hide_alerts', false);
+    }
+
+    /**
      * Register settings
      */
     public function register_settings() {
@@ -127,6 +134,12 @@ class WIA_Inventory_Alerts {
             'type' => 'integer',
             'default' => 0,
             'sanitize_callback' => 'absint',
+        ));
+
+        register_setting('wia_settings', 'wia_hide_alerts', array(
+            'type' => 'boolean',
+            'default' => false,
+            'sanitize_callback' => 'rest_sanitize_boolean',
         ));
 
         add_settings_section(
@@ -140,6 +153,14 @@ class WIA_Inventory_Alerts {
             'wia_stock_threshold',
             __('Stock Threshold', 'woo-inventory-alerts'),
             array($this, 'threshold_field_callback'),
+            'wia-settings',
+            'wia_main_section'
+        );
+
+        add_settings_field(
+            'wia_hide_alerts',
+            __('Hide Alerts on Order Page', 'woo-inventory-alerts'),
+            array($this, 'hide_alerts_field_callback'),
             'wia-settings',
             'wia_main_section'
         );
@@ -166,6 +187,25 @@ class WIA_Inventory_Alerts {
                class="small-text">
         <p class="description">
             <?php esc_html_e('Show alert when product stock is at or below this number. Default: 0 (only out of stock).', 'woo-inventory-alerts'); ?>
+        </p>
+        <?php
+    }
+
+    /**
+     * Hide alerts field
+     */
+    public function hide_alerts_field_callback() {
+        $checked = $this->is_alerts_hidden();
+        ?>
+        <label>
+            <input type="checkbox"
+                   name="wia_hide_alerts"
+                   value="1"
+                   <?php checked($checked); ?>>
+            <?php esc_html_e('Hide inventory alerts on the order edit page for all users', 'woo-inventory-alerts'); ?>
+        </label>
+        <p class="description">
+            <?php esc_html_e('When enabled, the Stock Alert column and Inventory Alerts meta box will not be displayed.', 'woo-inventory-alerts'); ?>
         </p>
         <?php
     }
@@ -263,6 +303,18 @@ class WIA_Inventory_Alerts {
             .wia-meta-box-alert.wia-warning strong {
                 color: #996800;
             }
+            .wia-alert-list {
+                margin: 0;
+                padding-left: 20px;
+                list-style-type: disc;
+            }
+            .wia-alert-list li {
+                margin: 3px 0;
+            }
+            .wia-product-name {
+                color: #d63638;
+                font-weight: 600;
+            }
             .wia-all-good {
                 padding: 10px;
                 color: #00a32a;
@@ -274,6 +326,9 @@ class WIA_Inventory_Alerts {
      * Add stock column header
      */
     public function add_stock_column_header($order) {
+        if ($this->is_alerts_hidden()) {
+            return;
+        }
         echo '<th class="wia-stock-column">' . esc_html__('Stock Alert', 'woo-inventory-alerts') . '</th>';
     }
 
@@ -281,6 +336,10 @@ class WIA_Inventory_Alerts {
      * Add stock column value
      */
     public function add_stock_column_value($product, $item, $item_id) {
+        if ($this->is_alerts_hidden()) {
+            return;
+        }
+
         echo '<td class="wia-stock-column">';
 
         if (!$product) {
@@ -319,6 +378,10 @@ class WIA_Inventory_Alerts {
      * Add meta box for stock alerts summary
      */
     public function add_stock_alert_meta_box() {
+        if ($this->is_alerts_hidden()) {
+            return;
+        }
+
         // Determine screen based on HPOS status (with fallback for older WooCommerce)
         $screen = 'shop_order';
         if (class_exists('\Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController')) {
@@ -387,18 +450,44 @@ class WIA_Inventory_Alerts {
             return;
         }
 
-        foreach ($alerts as $alert) {
-            $class = $alert['type'] === 'out_of_stock' ? '' : ' wia-warning';
-            $label = $alert['type'] === 'out_of_stock'
-                ? __('OUT OF STOCK', 'woo-inventory-alerts')
-                : sprintf(__('LOW STOCK: %d left', 'woo-inventory-alerts'), $alert['stock']);
+        // Separate alerts by type
+        $out_of_stock_alerts = array_filter($alerts, function($alert) {
+            return $alert['type'] === 'out_of_stock';
+        });
+        $low_stock_alerts = array_filter($alerts, function($alert) {
+            return $alert['type'] === 'low_stock';
+        });
 
-            printf(
-                '<div class="wia-meta-box-alert%s"><strong>%s</strong><br>%s</div>',
-                esc_attr($class),
-                esc_html($label),
-                esc_html($alert['name'])
-            );
+        // Display out of stock alerts
+        if (!empty($out_of_stock_alerts)) {
+            echo '<div class="wia-meta-box-alert">';
+            echo '<strong>' . esc_html__('OUT OF STOCK', 'woo-inventory-alerts') . '</strong>';
+            echo '<ul class="wia-alert-list">';
+            foreach ($out_of_stock_alerts as $alert) {
+                printf(
+                    '<li><span class="wia-product-name">%s</span></li>',
+                    esc_html($alert['name'])
+                );
+            }
+            echo '</ul>';
+            echo '</div>';
+        }
+
+        // Display low stock alerts
+        if (!empty($low_stock_alerts)) {
+            echo '<div class="wia-meta-box-alert wia-warning">';
+            echo '<strong>' . esc_html__('LOW STOCK', 'woo-inventory-alerts') . '</strong>';
+            echo '<ul class="wia-alert-list">';
+            foreach ($low_stock_alerts as $alert) {
+                printf(
+                    '<li><span class="wia-product-name">%s</span> <small>(%d %s)</small></li>',
+                    esc_html($alert['name']),
+                    $alert['stock'],
+                    esc_html__('left', 'woo-inventory-alerts')
+                );
+            }
+            echo '</ul>';
+            echo '</div>';
         }
     }
 }
