@@ -140,7 +140,7 @@ class WIA_Inventory_Alerts {
             if (isset($setting['type']) && 'sectionend' === $setting['type'] && isset($setting['id']) && 'product_inventory_options' === $setting['id']) {
                 // Add our settings
                 $new_settings[] = array(
-                    'title' => __('Order Page Alerts', 'woo-inventory-alerts'),
+                    'title' => __('Woo Inventory Alerts', 'woo-inventory-alerts'),
                     'type'  => 'title',
                     'desc'  => __('Configure inventory alerts displayed on order edit pages.', 'woo-inventory-alerts'),
                     'id'    => 'wia_inventory_alerts_options',
