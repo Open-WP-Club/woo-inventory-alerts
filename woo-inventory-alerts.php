@@ -292,28 +292,22 @@ class WIA_Inventory_Alerts {
             return;
         }
 
-        // Get the actual product for stock (handle variations)
-        $stock_product = $product;
-        if ($product->is_type('variation')) {
-            $stock_product = $product;
-        }
-
         // Check if product manages stock
-        if (!$stock_product->managing_stock()) {
+        if (!$product->managing_stock()) {
             echo '&mdash;';
             echo '</td>';
             return;
         }
 
-        $stock_qty = $stock_product->get_stock_quantity();
+        $stock_qty = $product->get_stock_quantity();
         $threshold = $this->get_threshold();
 
-        if ($stock_qty <= 0) {
+        if ($stock_qty !== null && $stock_qty <= 0) {
             printf(
                 '<span class="wia-stock-alert wia-out-of-stock">%s</span>',
                 esc_html__('Out of Stock', 'woo-inventory-alerts')
             );
-        } elseif ($stock_qty <= $threshold) {
+        } elseif ($stock_qty !== null && $stock_qty <= $threshold) {
             printf(
                 '<span class="wia-stock-alert wia-low-stock">%s: %d</span>',
                 esc_html__('Low Stock', 'woo-inventory-alerts'),
@@ -371,13 +365,13 @@ class WIA_Inventory_Alerts {
             $stock_qty = $product->get_stock_quantity();
             $product_name = $product->get_name();
 
-            if ($stock_qty <= 0) {
+            if ($stock_qty !== null && $stock_qty <= 0) {
                 $alerts[] = array(
                     'type' => 'out_of_stock',
                     'name' => $product_name,
                     'stock' => $stock_qty,
                 );
-            } elseif ($stock_qty <= $threshold) {
+            } elseif ($stock_qty !== null && $stock_qty <= $threshold) {
                 $alerts[] = array(
                     'type' => 'low_stock',
                     'name' => $product_name,

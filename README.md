@@ -4,7 +4,7 @@ A WooCommerce plugin that displays low stock and out of stock alerts directly on
 
 ## Features
 
-- **Stock Alert Column** - Adds a dedicated "Stock Alert" column to the order items table showing red badges for out of stock or low stock items
+- **Stock Alert Column** - Adds a dedicated "Stock Alert" column to the order items table showing red badges for out of stock and orange badges for low stock items
 - **Side Panel Summary** - Displays a summary meta box on the order page with all inventory alerts at a glance
 - **Configurable Threshold** - Set your own stock threshold for when to show low stock warnings (default: 0 = only out of stock)
 - **HPOS Compatible** - Fully compatible with WooCommerce High-Performance Order Storage
