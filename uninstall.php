@@ -1,6 +1,6 @@
 <?php
 /**
- * Uninstall script for Woo Inventory Alerts
+ * Uninstall script for Inventory Alerts for WooCommerce
  *
  * This file runs when the plugin is deleted from the WordPress admin.
  * It removes all options created by the plugin.

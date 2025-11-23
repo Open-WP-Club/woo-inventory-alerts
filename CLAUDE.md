@@ -1,4 +1,4 @@
-# Woo Inventory Alerts
+# Inventory Alerts for WooCommerce
 
 A WooCommerce plugin that displays low stock and out of stock alerts on order edit pages.
 
@@ -32,7 +32,7 @@ woo-inventory-alerts/
 ## Settings Location
 
 Settings are integrated into WooCommerce's native settings:
-**WooCommerce > Settings > Products > Inventory** (scroll to "Woo Inventory Alerts" section)
+**WooCommerce > Settings > Products > Inventory** (scroll to "Inventory Alerts for WooCommerce" section)
 
 ## Key Classes & Methods
 

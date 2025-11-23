@@ -2,8 +2,8 @@
 Contributors: openwpclub
 Tags: woocommerce, inventory, stock, alerts, orders
 Requires at least: 5.8
-Tested up to: 6.4
-Stable tag: 1.0.1
+Tested up to: 6.8
+Stable tag: 1.1.0
 Requires PHP: 7.4
 License: Apache-2.0
 License URI: https://www.apache.org/licenses/LICENSE-2.0
@@ -32,7 +32,7 @@ Never miss that an item is running low - see inventory alerts right where you pr
 
 = Where do I configure the plugin? =
 
-Go to WooCommerce > Settings > Products > Inventory and scroll to the "Woo Inventory Alerts Plugin" section.
+Go to WooCommerce > Settings > Products > Inventory and scroll to the "Inventory Alerts for WooCommerce Plugin" section.
 
 = What does the threshold setting do? =
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Woo Inventory Alerts
+ * Plugin Name: Inventory Alerts for WooCommerce
  * Plugin URI: https://github.com/Open-WP-Club/woo-inventory-alerts
  * Description: Shows alerts for low stock and out of stock items directly on the WooCommerce order edit page.
  * Version: 1.1.0
@@ -43,7 +43,7 @@ function wia_check_woocommerce() {
 function wia_woocommerce_missing_notice() {
     ?>
     <div class="notice notice-error">
-        <p><?php esc_html_e('Woo Inventory Alerts requires WooCommerce to be installed and active.', 'woo-inventory-alerts'); ?></p>
+        <p><?php esc_html_e('Inventory Alerts for WooCommerce requires WooCommerce to be installed and active.', 'woo-inventory-alerts'); ?></p>
     </div>
     <?php
 }

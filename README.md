@@ -1,4 +1,4 @@
-# Woo Inventory Alerts
+# Inventory Alerts for WooCommerce
 
 A WooCommerce plugin that displays low stock and out of stock alerts directly on the order edit page. Never miss that an item is running low - see it right where you process orders.
 
@@ -27,7 +27,7 @@ When viewing an order, you'll see:
 
 ## Configuration
 
-Navigate to **WooCommerce > Settings > Products > Inventory** and scroll to the "Woo Inventory Alerts Plugin" section to set:
+Navigate to **WooCommerce > Settings > Products > Inventory** and scroll to the "Inventory Alerts for WooCommerce Plugin" section to set:
 
 - **Stock Threshold** - Show alerts when stock is at or below this number
   - `0` (default): Only show alerts for out of stock items
