@@ -21,13 +21,13 @@ When viewing an order, you'll see:
 ## Installation
 
 1. Download the plugin files
-2. Upload to `/wp-content/plugins/woo-inventory-alerts/`
+2. Upload to `/wp-content/plugins/inventory-alerts-for-woo/`
 3. Activate the plugin through the 'Plugins' menu in WordPress
 4. Configure at **WooCommerce > Settings > Products > Inventory**
 
 ## Configuration
 
-Navigate to **WooCommerce > Settings > Products > Inventory** and scroll to the "Inventory Alerts for WooCommerce Plugin" section to set:
+Navigate to **WooCommerce > Settings > Products > Inventory** and scroll to the inventory alerts settings:
 
 - **Stock Threshold** - Show alerts when stock is at or below this number
   - `0` (default): Only show alerts for out of stock items

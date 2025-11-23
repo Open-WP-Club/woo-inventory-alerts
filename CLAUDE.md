@@ -32,7 +32,7 @@ woo-inventory-alerts/
 ## Settings Location
 
 Settings are integrated into WooCommerce's native settings:
-**WooCommerce > Settings > Products > Inventory** (scroll to "Inventory Alerts for WooCommerce" section)
+**WooCommerce > Settings > Products > Inventory** (scroll to the inventory alerts settings)
 
 ## Key Classes & Methods
 

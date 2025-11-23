@@ -8,7 +8,7 @@
  * Author URI: https://github.com/Open-WP-Club
  * License: Apache-2.0
  * License URI: https://www.apache.org/licenses/LICENSE-2.0
- * Text Domain: woo-inventory-alerts
+ * Text Domain: inventory-alerts-for-woo
  * Domain Path: /languages
  * Requires at least: 5.8
  * Requires PHP: 7.4
@@ -43,7 +43,7 @@ function wia_check_woocommerce() {
 function wia_woocommerce_missing_notice() {
     ?>
     <div class="notice notice-error">
-        <p><?php esc_html_e('Inventory Alerts for WooCommerce requires WooCommerce to be installed and active.', 'woo-inventory-alerts'); ?></p>
+        <p><?php esc_html_e('Inventory Alerts for WooCommerce requires WooCommerce to be installed and active.', 'inventory-alerts-for-woo'); ?></p>
     </div>
     <?php
 }
@@ -62,7 +62,7 @@ add_action('before_woocommerce_init', function() {
  */
 add_filter('plugin_action_links_' . plugin_basename(WIA_PLUGIN_FILE), function($links) {
     if (class_exists('WooCommerce')) {
-        $settings_link = '<a href="' . esc_url(admin_url('admin.php?page=wc-settings&tab=products&section=inventory')) . '">' . esc_html__('Settings', 'woo-inventory-alerts') . '</a>';
+        $settings_link = '<a href="' . esc_url(admin_url('admin.php?page=wc-settings&tab=products&section=inventory')) . '">' . esc_html__('Settings', 'inventory-alerts-for-woo') . '</a>';
         array_unshift($links, $settings_link);
     }
     return $links;
@@ -146,8 +146,8 @@ class WIA_Inventory_Alerts {
 
 
                 $new_settings[] = array(
-                    'title'             => __('Alert threshold', 'woo-inventory-alerts'),
-                    'desc'              => __('Show alert when product stock is at or below this number. Set to 0 to only show out of stock alerts.', 'woo-inventory-alerts'),
+                    'title'             => __('Alert threshold', 'inventory-alerts-for-woo'),
+                    'desc'              => __('Show alert when product stock is at or below this number. Set to 0 to only show out of stock alerts.', 'inventory-alerts-for-woo'),
                     'desc_tip'          => true,
                     'id'                => 'wia_stock_threshold',
                     'type'              => 'number',
@@ -160,8 +160,8 @@ class WIA_Inventory_Alerts {
                 );
 
                 $new_settings[] = array(
-                    'title'   => __('Hide alerts', 'woo-inventory-alerts'),
-                    'desc'    => __('Hide inventory alerts on the order edit page for all users', 'woo-inventory-alerts'),
+                    'title'   => __('Hide alerts', 'inventory-alerts-for-woo'),
+                    'desc'    => __('Hide inventory alerts on the order edit page for all users', 'inventory-alerts-for-woo'),
                     'id'      => 'wia_hide_alerts',
                     'type'    => 'checkbox',
                     'default' => 'no',
@@ -206,7 +206,7 @@ class WIA_Inventory_Alerts {
         if ($this->is_alerts_hidden()) {
             return;
         }
-        echo '<th class="wia-stock-column">' . esc_html__('Stock Alert', 'woo-inventory-alerts') . '</th>';
+        echo '<th class="wia-stock-column">' . esc_html__('Stock Alert', 'inventory-alerts-for-woo') . '</th>';
     }
 
     /**
@@ -238,12 +238,12 @@ class WIA_Inventory_Alerts {
         if ($stock_qty !== null && $stock_qty <= 0) {
             printf(
                 '<span class="wia-stock-alert wia-out-of-stock">%s</span>',
-                esc_html__('Out of Stock', 'woo-inventory-alerts')
+                esc_html__('Out of Stock', 'inventory-alerts-for-woo')
             );
         } elseif ($stock_qty !== null && $stock_qty <= $threshold) {
             printf(
                 '<span class="wia-stock-alert wia-low-stock">%s: %d</span>',
-                esc_html__('Low Stock', 'woo-inventory-alerts'),
+                esc_html__('Low Stock', 'inventory-alerts-for-woo'),
                 (int) $stock_qty
             );
         }
@@ -270,7 +270,7 @@ class WIA_Inventory_Alerts {
 
         add_meta_box(
             'wia-stock-alerts',
-            __('Inventory Alerts', 'woo-inventory-alerts'),
+            __('Inventory Alerts', 'inventory-alerts-for-woo'),
             array($this, 'render_stock_alert_meta_box'),
             $screen,
             'side',
@@ -290,7 +290,7 @@ class WIA_Inventory_Alerts {
         }
 
         if (!$order) {
-            echo '<p>' . esc_html__('Order not found.', 'woo-inventory-alerts') . '</p>';
+            echo '<p>' . esc_html__('Order not found.', 'inventory-alerts-for-woo') . '</p>';
             return;
         }
 
@@ -323,7 +323,7 @@ class WIA_Inventory_Alerts {
         }
 
         if (empty($alerts)) {
-            echo '<p class="wia-all-good">' . esc_html__('All items have sufficient stock.', 'woo-inventory-alerts') . '</p>';
+            echo '<p class="wia-all-good">' . esc_html__('All items have sufficient stock.', 'inventory-alerts-for-woo') . '</p>';
             return;
         }
 
@@ -338,7 +338,7 @@ class WIA_Inventory_Alerts {
         // Display out of stock alerts
         if (!empty($out_of_stock_alerts)) {
             echo '<div class="wia-meta-box-alert">';
-            echo '<strong>' . esc_html__('OUT OF STOCK', 'woo-inventory-alerts') . '</strong>';
+            echo '<strong>' . esc_html__('OUT OF STOCK', 'inventory-alerts-for-woo') . '</strong>';
             echo '<ul class="wia-alert-list">';
             foreach ($out_of_stock_alerts as $alert) {
                 printf(
@@ -353,14 +353,14 @@ class WIA_Inventory_Alerts {
         // Display low stock alerts
         if (!empty($low_stock_alerts)) {
             echo '<div class="wia-meta-box-alert wia-warning">';
-            echo '<strong>' . esc_html__('LOW STOCK', 'woo-inventory-alerts') . '</strong>';
+            echo '<strong>' . esc_html__('LOW STOCK', 'inventory-alerts-for-woo') . '</strong>';
             echo '<ul class="wia-alert-list">';
             foreach ($low_stock_alerts as $alert) {
                 printf(
                     '<li><span class="wia-product-name">%s</span> <small>(%d %s)</small></li>',
                     esc_html($alert['name']),
                     (int) $alert['stock'],
-                    esc_html__('left', 'woo-inventory-alerts')
+                    esc_html__('left', 'inventory-alerts-for-woo')
                 );
             }
             echo '</ul>';

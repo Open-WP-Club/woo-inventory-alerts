@@ -19,12 +19,13 @@ Never miss that an item is running low - see inventory alerts right where you pr
 * Stock Alert Column - Shows red badges for out of stock and orange badges for low stock items
 * Side Panel Summary - Displays all inventory alerts at a glance in a meta box
 * Configurable Threshold - Set your own stock threshold for low stock warnings
+* Hide Option - Ability to hide alerts on the order page for all users
 * HPOS Compatible - Fully compatible with WooCommerce High-Performance Order Storage
 * Translation Ready - Includes text domain for translations
 
 == Installation ==
 
-1. Upload the plugin files to `/wp-content/plugins/woo-inventory-alerts/`
+1. Upload the plugin files to `/wp-content/plugins/inventory-alerts-for-woo/`
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Configure at WooCommerce > Settings > Products > Inventory
 
@@ -32,7 +33,7 @@ Never miss that an item is running low - see inventory alerts right where you pr
 
 = Where do I configure the plugin? =
 
-Go to WooCommerce > Settings > Products > Inventory and scroll to the "Inventory Alerts for WooCommerce Plugin" section.
+Go to WooCommerce > Settings > Products > Inventory and scroll to the inventory alerts settings.
 
 = What does the threshold setting do? =
 
@@ -45,6 +46,14 @@ Set to 0 (default) to only show out of stock alerts. Set to any number to show a
 3. Settings in WooCommerce > Settings > Products > Inventory
 
 == Changelog ==
+
+= 1.1.0 =
+* Renamed plugin to "Inventory Alerts for WooCommerce" for WordPress.org compliance
+* Changed text domain to "inventory-alerts-for-woo"
+* Fixed plugin checker issues (strict comparisons, proper escaping)
+* Added uninstall.php for cleanup on plugin deletion
+* Added languages folder for translations
+* Settings link only shows when WooCommerce is active
 
 = 1.0.1 =
 * Moved settings to WooCommerce Settings > Products > Inventory
@@ -60,5 +69,5 @@ Set to 0 (default) to only show out of stock alerts. Set to any number to show a
 
 == Upgrade Notice ==
 
-= 1.0.1 =
-Settings have moved to WooCommerce > Settings > Products > Inventory. Your existing settings will be preserved.
+= 1.1.0 =
+Plugin renamed to "Inventory Alerts for WooCommerce" for WordPress.org trademark compliance.
