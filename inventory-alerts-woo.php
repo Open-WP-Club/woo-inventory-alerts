@@ -220,14 +220,12 @@ class WIA_Inventory_Alerts {
         echo '<td class="wia-stock-column">';
 
         if (!$product) {
-            echo '&mdash;';
             echo '</td>';
             return;
         }
 
         // Check if product manages stock
         if (!$product->managing_stock()) {
-            echo '&mdash;';
             echo '</td>';
             return;
         }
